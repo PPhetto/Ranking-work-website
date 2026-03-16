@@ -1,0 +1,48 @@
+"use client"
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import './login.css';
+export default function Loginpage() {
+    const [username,setUsername] = useState("")
+    const [password,setPassword] = useState("")
+  return (
+    <div className='layout-page'>
+        <div className='box-login-page'>
+            <h3>Login</h3>
+            <div className='ipuser'>
+                <p>Username</p>
+                <input
+                    value={username}
+                    onChange={(u) => {
+                        setUsername(u.target.value)
+                    }}
+                />
+            </div>
+            <div className='ippass'>
+                <p>Password</p>
+                <input
+                    value={password}
+                    onChange={(p) => {
+                        setPassword(p.target.value)
+                    }}
+                />
+            </div>
+            <div className='forgot-donthave'>
+                <a href="">forgot Password</a>
+                <a href="/Register">{"Don't have accout?"}</a>
+            </div>
+            <div className='social-md'>
+                <a href="">
+                    <img src="/image/Google__G__logo.svg.png" alt="" />
+                </a>
+                <a href="">
+                    <img src="/image/Steam_icon_logo.svg.png" alt="" />
+                </a>
+            </div>
+            <button className='bt-login'>
+                Login
+            </button>
+        </div>
+    </div>
+  )
+}
