@@ -5,6 +5,40 @@ import './login.css';
 export default function Loginpage() {
     const [username,setUsername] = useState("")
     const [password,setPassword] = useState("")
+    const router = useRouter()
+
+    async function login() {
+        if (!username || !password) {
+            alert("Please")
+            return
+        }
+        const res = await fetch("/api/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        })
+        const data = await res.json()
+        
+        if (!res.ok) {
+            alert("Please")
+            return
+        }
+
+        localStorage.setItem("userId", data.userId)
+
+        if (res.ok) {
+            router.push("/Home")
+            alert("Login Success")
+            return
+        }
+        // router.push("/")
+    }
+
   return (
     <div className='layout-page'>
         <div className='box-login-page'>
@@ -39,7 +73,11 @@ export default function Loginpage() {
                     <img src="/image/Steam_icon_logo.svg.png" alt="" />
                 </a>
             </div>
-            <button className='bt-login'>
+            <button className='bt-login'
+                onClick={() => {
+                    login()
+                }}
+            >
                 Login
             </button>
         </div>
