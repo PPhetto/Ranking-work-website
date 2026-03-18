@@ -1,6 +1,7 @@
 "use client"
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import  Link  from 'next/link'
 import './login.css';
 export default function Loginpage() {
     const [username,setUsername] = useState("")
@@ -62,8 +63,8 @@ export default function Loginpage() {
                 />
             </div>
             <div className='forgot-donthave'>
-                <a href="">forgot Password</a>
-                <a href="/Register">{"Don't have accout?"}</a>
+                <a href="">Forgot Password</a>
+                <Link href="/Register">{"Don't have account?"}</Link>
             </div>
             <div className='social-md'>
                 <a href="">
