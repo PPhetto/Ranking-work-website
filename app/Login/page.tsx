@@ -8,6 +8,8 @@ export default function Loginpage() {
     const [password,setPassword] = useState("")
     const router = useRouter()
 
+    // console.log(localStorage.getItem("userId"))
+
     async function login() {
         if (!username || !password) {
             alert("Please")
@@ -29,6 +31,8 @@ export default function Loginpage() {
             alert("Please")
             return
         }
+
+        console.log("Log1",data.userId)
 
         localStorage.setItem("userId", data.userId)
 

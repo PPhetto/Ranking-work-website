@@ -22,6 +22,10 @@ export async function POST(req: Request) {
         )
     }
     return Response.json(
-        {message: "Login success"}
+        {
+            message: "Login success",
+            userId: user._id
+        }
+        
     )
 }
