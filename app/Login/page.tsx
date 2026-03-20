@@ -70,14 +70,14 @@ export default function Loginpage() {
                 <a href="">Forgot Password</a>
                 <Link href="/Register">{"Don't have account?"}</Link>
             </div>
-            <div className='social-md'>
+            {/* <div className='social-md'>
                 <a href="">
                     <img src="/image/Google__G__logo.svg.png" alt="" />
                 </a>
                 <a href="">
                     <img src="/image/Steam_icon_logo.svg.png" alt="" />
                 </a>
-            </div>
+            </div> */}
             <button className='bt-login'
                 onClick={() => {
                     login()
