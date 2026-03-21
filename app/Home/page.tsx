@@ -3,6 +3,7 @@ import './home.css';
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import Createbutton from '../component/createbutton';
 import Authcheck from '../component/authCheck'
 export default function Homepage() {
   const router = useRouter()
@@ -14,6 +15,7 @@ export default function Homepage() {
   return (
     <div className='layout-page-home'>
       <Authcheck />
+      <Createbutton />
       <nav className='navbar-content-top'>
         <ul>
           <li>
@@ -34,6 +36,32 @@ export default function Homepage() {
       <div className='box-content-home'>
         <h3>Your Working</h3>
         <ul>
+          <li>
+            <div className='title-card-home'>
+              <p>
+                Uma-musume JP website-practice
+              </p>
+            </div>
+            <div className='line-style'></div>
+            <div className='description-card-home'>
+              <p>
+                Description :
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illum at cumque laboriosam. Voluptatibus expedita debitis libero aut labore ex tempore placeat iusto minima? Consectetur repudiandae veniam perferendis voluptas doloremque?
+              </p>
+            </div>
+            <div className='pic-card-home'>
+              <div className='picture-info'>
+                {/* <img src="" alt="" /> */}
+              </div>
+              <div className='btinfo-card-home'>
+                <button>
+                  More...
+                </button>
+              </div>
+            </div>
+          </li>
           <li>
             <div className='title-card-home'>
               <p>
