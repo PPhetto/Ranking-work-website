@@ -1,17 +1,33 @@
 "use client"
 import './home.css';
-import React from 'react'
+import { Post } from '@/types/Post';
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Createbutton from '../component/createbutton';
 import Authcheck from '../component/authCheck'
+
 export default function Homepage() {
+
+  const [posts,setPosts] = useState<Post[]>([])
   const router = useRouter()
+
   async function logout() {
     localStorage.removeItem("userId")
     // console.log(localStorage.getItem("userId"))
     router.push("/")
   }
+
+  useEffect (() => {
+    async function fetchPost() {
+      const res = await fetch("/api/createPost")
+      const data: Post[] = await res.json()
+      setPosts(data)
+    }
+    fetchPost()
+  }, [])
+
+
   return (
     <div className='layout-page-home'>
       <Authcheck />
@@ -36,7 +52,35 @@ export default function Homepage() {
       <div className='box-content-home'>
         <h3>Your Working</h3>
         <ul>
-          <li>
+          {posts.map((post, index) => (
+            <li key={post._id}>
+              <div className='title-card-home'>
+                <p>
+                  {post.title}
+                </p>
+              </div>
+              <div className='line-style'></div>
+              <div className='description-card-home'>
+                <p>
+                  Description :
+                </p>
+                <p>
+                  {post.description}
+                </p>
+              </div>
+              <div className='pic-card-home'>
+                <div className='picture-info'>
+                  <img src={post.image} alt="" />
+                </div>
+                <div className='btinfo-card-home'>
+                  <button>
+                    More...
+                  </button>
+                </div>
+              </div>
+            </li>
+          ))}
+          {/* <li>
             <div className='title-card-home'>
               <p>
                 Uma-musume JP website-practice
@@ -53,7 +97,7 @@ export default function Homepage() {
             </div>
             <div className='pic-card-home'>
               <div className='picture-info'>
-                {/* <img src="" alt="" /> */}
+                <img src="" alt="" />
               </div>
               <div className='btinfo-card-home'>
                 <button>
@@ -61,33 +105,7 @@ export default function Homepage() {
                 </button>
               </div>
             </div>
-          </li>
-          <li>
-            <div className='title-card-home'>
-              <p>
-                Uma-musume JP website-practice
-              </p>
-            </div>
-            <div className='line-style'></div>
-            <div className='description-card-home'>
-              <p>
-                Description :
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illum at cumque laboriosam. Voluptatibus expedita debitis libero aut labore ex tempore placeat iusto minima? Consectetur repudiandae veniam perferendis voluptas doloremque?
-              </p>
-            </div>
-            <div className='pic-card-home'>
-              <div className='picture-info'>
-                {/* <img src="" alt="" /> */}
-              </div>
-              <div className='btinfo-card-home'>
-                <button>
-                  More...
-                </button>
-              </div>
-            </div>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>

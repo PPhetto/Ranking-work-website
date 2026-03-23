@@ -14,3 +14,11 @@ export async function POST(req: Request) {
 
     return Response.json(post)
 }
+
+export async function GET() {
+    await connectDB()
+
+    const  posts = await Post.find()
+
+    return Response.json(posts)
+}
