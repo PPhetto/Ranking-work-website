@@ -62,7 +62,7 @@ export default function Homepage() {
               <div className='line-style'></div>
               <div className='description-card-home'>
                 <p>
-                  Description :
+                  : Description :
                 </p>
                 <p>
                   {post.description}
