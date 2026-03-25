@@ -22,3 +22,13 @@ export async function GET() {
 
     return Response.json(posts)
 }
+
+export async function DELETE(req: Request) {
+    await connectDB()
+
+    const body = await req.json()
+
+    const deletePost = await Post.findByIdAndDelete(body._id)
+
+    return Response.json(deletePost)
+}

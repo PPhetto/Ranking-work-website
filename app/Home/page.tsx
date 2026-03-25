@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Createbutton from '../component/createbutton';
+import Deletebutton from '../component/deletebutton';
 import Authcheck from '../component/authCheck'
 
 export default function Homepage() {
@@ -76,6 +77,7 @@ export default function Homepage() {
                   <button>
                     More...
                   </button>
+                  <Deletebutton _id={post._id} />
                 </div>
               </div>
             </li>

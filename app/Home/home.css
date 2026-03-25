@@ -136,16 +136,17 @@
 
 .btinfo-card-home {
     display: flex;
+    flex-direction: column;
     width: 40%;
+    gap: 10px;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
 }
 .btinfo-card-home button {
     color: white;
     border: 1px solid white;
     width: 150px;
     height: 50px;
-    margin-bottom: 50px;
     background-color: red;
 }
 .btinfo-card-home button:hover {

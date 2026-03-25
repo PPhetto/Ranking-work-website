@@ -4,3 +4,7 @@ export type Post = {
     description: string,
     image: string
 }
+
+export type DeletePost = {
+    _id: string
+}

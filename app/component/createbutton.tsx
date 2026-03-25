@@ -3,8 +3,32 @@ import { useState } from 'react'
 import '../Home/home.css';
 export default function Createbutton() {
 
+  const [ntitle,setNtitle] = useState("")
+  const [ndescription,setNdescription] = useState("")
+  const [url,setUlr] = useState("https://media.online-station.net/images/2021/09/e7b8bec8c42189db2e921fd106d3464a.webp")
+
   const [open,setOpen] = useState(false)
-  const [url,setUlr] = useState("")
+
+  const hSave = async () => {
+    try {
+      const res = await fetch("/api/createPost",{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          title: ntitle,
+          description: ndescription,
+          image: url
+        })
+      })
+      location.reload()
+      // const data = await res.json()
+      // console.log(data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
   
   return (
     <div className='bt-create-home'>
@@ -21,13 +45,22 @@ export default function Createbutton() {
               <h3>Create new post</h3>
               <div className='input-content'>
                 <input
+                  value={ntitle}
+                  onChange={(t) => {
+                    setNtitle(t.target.value)
+                  }}
                   placeholder='Title Post'
                 />
                 <textarea
+                  value={ndescription}
+                  onChange={(d) => {
+                    setNdescription(d.target.value)
+                  }}
                   rows={10}
                   placeholder="Description"
                 />
                 <input
+                  value={url}
                   onChange={(u) => {
                     setUlr(u.target.value)
                   }}
@@ -41,6 +74,7 @@ export default function Createbutton() {
                 className='bt-save'
                 onClick={() => {
                   setOpen(false)
+                  hSave()
                 }}
               >
                 Save
