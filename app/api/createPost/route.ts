@@ -32,3 +32,19 @@ export async function DELETE(req: Request) {
 
     return Response.json(deletePost)
 }
+
+export async function PUT(req: Request) {
+    await connectDB()
+
+    const body = await req.json()
+
+    const editPost = await Post.findByIdAndUpdate(body._id,{
+        title: body.title,
+        description: body.description,
+        image: body.image
+    }, {
+        new: true
+    })
+
+    return Response.json(editPost)
+}

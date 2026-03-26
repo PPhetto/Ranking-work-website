@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Createbutton from '../component/createbutton';
 import Deletebutton from '../component/deletebutton';
+import Editbutton from '../component/editbutton';
 import Authcheck from '../component/authCheck'
 
 export default function Homepage() {
@@ -77,6 +78,7 @@ export default function Homepage() {
                   <button>
                     More...
                   </button>
+                  <Editbutton _id={post._id} title={post.title} description={post.description} image={post.image}/>
                   <Deletebutton _id={post._id} />
                 </div>
               </div>

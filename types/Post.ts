@@ -8,3 +8,10 @@ export type Post = {
 export type DeletePost = {
     _id: string
 }
+
+export type EditPost = {
+    _id: string,
+    title: string,
+    description: string,
+    image: string
+}
