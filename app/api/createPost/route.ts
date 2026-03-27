@@ -1,5 +1,6 @@
 import { connectDB } from "@/lib/mongodb";
 import Post from "@/models/Posts";
+import mongoose from "mongoose";
 
 export async function POST(req: Request) {
     await connectDB()
@@ -9,16 +10,20 @@ export async function POST(req: Request) {
     const post = await Post.create({
         title: body.title,
         description: body.description,
-        image: body.image
+        image: body.image,
+        user: new mongoose.Types.ObjectId(body.user)
     })
 
     return Response.json(post)
 }
 
-export async function GET() {
+export async function GET(req: Request) {
     await connectDB()
 
-    const  posts = await Post.find()
+    const { searchParams } = new URL(req.url)
+    const userId = searchParams.get("userId")
+
+    const  posts = await Post.find({ user: userId })
 
     return Response.json(posts)
 }

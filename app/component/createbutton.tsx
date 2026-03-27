@@ -1,15 +1,17 @@
 "use client"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import '../Home/home.css';
 export default function Createbutton() {
 
   const [ntitle,setNtitle] = useState("")
   const [ndescription,setNdescription] = useState("")
   const [url,setUlr] = useState("https://media.online-station.net/images/2021/09/e7b8bec8c42189db2e921fd106d3464a.webp")
+  // const [uid,setUid] = useState<string | null>(null)
 
   const [open,setOpen] = useState(false)
 
   const hSave = async () => {
+    const userId = localStorage.getItem("userId")
     try {
       const res = await fetch("/api/createPost",{
         method: "POST",
@@ -19,7 +21,8 @@ export default function Createbutton() {
         body: JSON.stringify({
           title: ntitle,
           description: ndescription,
-          image: url
+          image: url,
+          user: userId
         })
       })
       location.reload()
@@ -29,6 +32,8 @@ export default function Createbutton() {
       console.log(err)
     }
   }
+
+
   
   return (
     <div className='bt-create-home'>

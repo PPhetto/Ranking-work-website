@@ -21,8 +21,9 @@ export default function Homepage() {
   }
 
   useEffect (() => {
+    const userId = localStorage.getItem("userId")
     async function fetchPost() {
-      const res = await fetch("/api/createPost")
+      const res = await fetch(`/api/createPost?userId=${userId}`)
       const data: Post[] = await res.json()
       setPosts(data)
     }
