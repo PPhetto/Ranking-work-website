@@ -8,6 +8,7 @@ import Createbutton from '../component/createbutton';
 import Deletebutton from '../component/deletebutton';
 import Editbutton from '../component/editbutton';
 import Authcheck from '../component/authCheck'
+import Moredetailbutton from '../component/moredetailbutton';
 
 export default function Homepage() {
 
@@ -76,9 +77,7 @@ export default function Homepage() {
                   <img src={post.image} alt="" />
                 </div>
                 <div className='btinfo-card-home'>
-                  <button>
-                    More...
-                  </button>
+                  <Moredetailbutton title={post.title} description={post.description} image={post.image}/>
                   <Editbutton _id={post._id} title={post.title} description={post.description} image={post.image}/>
                   <Deletebutton _id={post._id} />
                 </div>

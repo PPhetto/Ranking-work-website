@@ -15,3 +15,9 @@ export type EditPost = {
     description: string,
     image: string
 }
+
+export type Moreinfo = {
+    title: string,
+    description: string,
+    image: string
+}

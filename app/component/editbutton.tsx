@@ -24,6 +24,7 @@ export default function Editbutton({_id,title,description,image} : EditPost) {
                 image: nimage
             })
         })
+        location.reload()
     }
   return (
     <div>
@@ -37,10 +38,11 @@ export default function Editbutton({_id,title,description,image} : EditPost) {
         {cbutton && (
           <div className='popup-createbt'>
           <div className='popup-content'>
-            <h3>Create new post</h3>
+            <h3>Edit Post</h3>
             <div className='input-content'>
               <input
                 value={ntitle}
+                disabled 
                 onChange={(t) => {
                   setNtitle(t.target.value)
                 }}
