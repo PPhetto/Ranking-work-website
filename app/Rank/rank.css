@@ -1,0 +1,70 @@
+.title-top-ranking {
+    display: flex;
+    margin-top: 30px;
+}
+.title-top-ranking h3 {
+    font-size: 40px;
+}
+.layout-rankpage {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-content-rankpage {
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
+    border: 1px solid black;
+    padding: 10px;
+}
+.box-content-rankpage ul {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    gap: 5px;
+}
+.box-content-rankpage ul li {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    width: 100%;
+    /* border-bottom: 1px solid black; */
+}
+.box-content-rankpage ul li:last-child {
+    border-bottom: none;
+}
+.index {
+    display: flex;
+    width: 5%;
+    justify-content: center;
+    background-color: red;
+}
+.index p {
+    color: white;
+    font-weight: bold;
+}
+.username {
+    display: flex;
+    width: 85%;
+    justify-content: center;
+    background-color: antiquewhite;
+}
+.username p {
+    margin-left: 20px;
+}
+.cPost {
+    display: flex;
+    width: 10%;
+    justify-content: center;
+    background-color: green;
+}
+.cPost p {
+    color: black;
+    font-weight: bold;
+}

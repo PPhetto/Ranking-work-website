@@ -1,7 +1,7 @@
 "use client"
 import './home.css';
 import { Post } from '@/types/Post';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Createbutton from '../component/createbutton';
@@ -9,17 +9,13 @@ import Deletebutton from '../component/deletebutton';
 import Editbutton from '../component/editbutton';
 import Authcheck from '../component/authCheck'
 import Moredetailbutton from '../component/moredetailbutton';
+import Menubar from '../component/menubar';
 
 export default function Homepage() {
 
   const [posts,setPosts] = useState<Post[]>([])
-  const router = useRouter()
 
-  async function logout() {
-    localStorage.removeItem("userId")
-    // console.log(localStorage.getItem("userId"))
-    router.push("/")
-  }
+
 
   useEffect (() => {
     const userId = localStorage.getItem("userId")
@@ -36,23 +32,8 @@ export default function Homepage() {
     <div className='layout-page-home'>
       <Authcheck />
       <Createbutton />
-      <nav className='navbar-content-top'>
-        <ul>
-          <li>
-            <a href="">
-              <p>Rank</p>
-            </a>
-          </li>
-          <li>
-            <Link 
-              href="/"
-              onClick={() => {logout()}}
-            >
-              <p>Logout</p>
-            </Link>
-          </li>
-        </ul>
-      </nav>
+      <Menubar />
+
       <div className='box-content-home'>
         <h3>Your Working</h3>
         <ul>
