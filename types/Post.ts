@@ -21,3 +21,8 @@ export type Moreinfo = {
     description: string,
     image: string
 }
+
+export type Rank = {
+    username: string,
+    postcount: string
+}

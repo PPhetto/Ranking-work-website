@@ -1,7 +1,23 @@
+"use client"
 import './rank.css';
 import Menubar from '../component/menubar';
+import { Rank } from '@/types/Post';
+import { useEffect, useState } from 'react';
 
 export default function Rankpage() {
+    
+    const [datauser,setDatauser] = useState<Rank[]>([])
+
+    useEffect(() => {
+        async function apiRank() {
+            const res = await fetch("/api/rank")
+            const data = await res.json()        
+
+            setDatauser(data)
+        }
+        apiRank()
+    }, [])
+
   return (
     <div className="layout-rankpage">
         <Menubar />
@@ -10,17 +26,19 @@ export default function Rankpage() {
         </div>
         <div className='box-content-rankpage'>
             <ul>
-                <li>
-                    <div className='index'>
-                        <p>1</p>
-                    </div>
-                    <div className='username'>
-                        <p>Tanachot ketsomboon</p>
-                    </div>
-                    <div className='cPost'>
-                        <p>1</p>
-                    </div>
-                </li>
+                {datauser.map((user, index) => (
+                    <li key={index}>
+                        <div className='index'>
+                            <p>{index + 1}</p>
+                        </div>
+                        <div className='username'>
+                            <p>{user.username}</p>
+                        </div>
+                        <div className='cPost'>
+                            <p>{user.postcount}</p>
+                        </div>
+                    </li>                   
+                ))}
             </ul>
         </div>
     </div>
