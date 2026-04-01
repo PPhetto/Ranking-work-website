@@ -28,20 +28,22 @@ export default function Loginpage() {
         const data = await res.json()
         
         if (!res.ok) {
-            alert("Please")
+            alert(data.message)
             return
         }
 
         console.log("Log1",data.userId)
 
         localStorage.setItem("userId", data.userId)
+        localStorage.setItem("role", data.role)
 
-        if (res.ok) {
+        if (data.role === "admin") {
+            alert(data.message)
             router.push("/Home")
-            alert("Login Success")
-            return
+        } else if (data.role === "user") {
+            alert(data.message)
+            router.push("/Home")
         }
-        // router.push("/")
     }
 
   return (

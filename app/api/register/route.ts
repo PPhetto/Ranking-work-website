@@ -18,7 +18,8 @@ export async function POST(req: Request) {
     const user = await User.create({
         username: body.username,
         password: body.password,
-        address: body.address
+        address: body.address,
+        role: "user"
     })
 
     return Response.json(user)
