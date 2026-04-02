@@ -2,8 +2,6 @@
 import './home.css';
 import { Post } from '@/types/Post';
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import Createbutton from '../component/createbutton';
 import Deletebutton from '../component/deletebutton';
 import Editbutton from '../component/editbutton';
@@ -19,8 +17,16 @@ export default function Homepage() {
 
   useEffect (() => {
     const userId = localStorage.getItem("userId")
+    const userRole = localStorage.getItem("role")
     async function fetchPost() {
-      const res = await fetch(`/api/createPost?userId=${userId}`)
+      let url = ""
+      if (userRole === "admin") {
+        url = "/api/createPost"
+      } else  {
+        url = `/api/createPost?userId=${userId}`
+      }
+      // const res = await fetch(`/api/createPost?userId=${userId}`)
+      const res = await fetch(url)
       const data: Post[] = await res.json()
       setPosts(data)
     }

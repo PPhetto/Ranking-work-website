@@ -23,7 +23,15 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url)
     const userId = searchParams.get("userId")
 
-    const  posts = await Post.find({ user: userId })
+    let posts
+
+    if (userId) {
+        posts = await Post.find({ user: userId })
+    } else {
+        posts = await Post.find()
+    }
+
+    // const  posts = await Post.find({ user: userId })
 
     return Response.json(posts)
 }
