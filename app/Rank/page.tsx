@@ -32,7 +32,9 @@ export default function Rankpage() {
                             <p>{index + 1}</p>
                         </div>
                         <div className='username'>
-                            <p>{user.username}</p>
+                            <a href="">
+                                <p>{user.username}</p>
+                            </a>
                         </div>
                         <div className='cPost'>
                             <p>{user.postcount}</p>

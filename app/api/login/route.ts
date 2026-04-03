@@ -27,6 +27,7 @@ export async function POST(req: Request) {
         return Response.json({
             message: "Admin login successfully",
             userId: user._id,
+            username: user.username,
             role: user.role
         })
     }
@@ -34,6 +35,7 @@ export async function POST(req: Request) {
     return Response.json({
         message: "User login success",
         userId: user._id,
+        username: user.username,
         role: user.role
     })
 

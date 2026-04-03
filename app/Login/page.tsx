@@ -32,10 +32,12 @@ export default function Loginpage() {
             return
         }
 
-        console.log("Log1",data.userId)
-
+        localStorage.setItem("userN",data.username)
         localStorage.setItem("userId", data.userId)
         localStorage.setItem("role", data.role)
+
+        // console.log("data:", data)
+        // console.log("username:", data.username)
 
         if (data.role === "admin") {
             alert(data.message)

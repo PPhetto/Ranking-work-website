@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 export default function Menubar() {
 
   const router = useRouter()
+  const user = localStorage.getItem("userN")
 
   async function logout() {
     localStorage.removeItem("userId")
@@ -15,7 +16,7 @@ export default function Menubar() {
   }
 
   return (
-    <nav className='navbar-content-top'>
+  <nav className='navbar-content-top'>
     <ul>
       <li>
         <Link href="/Home">
@@ -25,6 +26,13 @@ export default function Menubar() {
       <li>
         <Link href="/Rank">
           <p>Rank</p>
+        </Link>
+      </li>
+      <li>
+        <Link href="/Home"
+          className='UID-username'
+        >
+          <p>UID : {user}</p>
         </Link>
       </li>
       <li>

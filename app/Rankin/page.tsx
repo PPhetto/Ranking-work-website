@@ -5,11 +5,10 @@ import { useEffect, useState } from 'react'
 import Createbutton from '../component/createbutton';
 import Deletebutton from '../component/deletebutton';
 import Editbutton from '../component/editbutton';
-import Authcheck from '../component/authCheck'
 import Moredetailbutton from '../component/moredetailbutton';
 import Menubar from '../component/menubar';
 
-export default function Homepage() {
+export default function Rankinpage() {
 
   const [posts,setPosts] = useState<Post[]>([])
 
@@ -34,7 +33,6 @@ export default function Homepage() {
 
   return (
     <div className='layout-page-home'>
-      <Authcheck />
       <Createbutton />
       <Menubar />
 
@@ -69,32 +67,6 @@ export default function Homepage() {
               </div>
             </li>
           ))}
-          {/* <li>
-            <div className='title-card-home'>
-              <p>
-                Uma-musume JP website-practice
-              </p>
-            </div>
-            <div className='line-style'></div>
-            <div className='description-card-home'>
-              <p>
-                Description :
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illum at cumque laboriosam. Voluptatibus expedita debitis libero aut labore ex tempore placeat iusto minima? Consectetur repudiandae veniam perferendis voluptas doloremque?
-              </p>
-            </div>
-            <div className='pic-card-home'>
-              <div className='picture-info'>
-                <img src="" alt="" />
-              </div>
-              <div className='btinfo-card-home'>
-                <button>
-                  More...
-                </button>
-              </div>
-            </div>
-          </li> */}
         </ul>
       </div>
     </div>
