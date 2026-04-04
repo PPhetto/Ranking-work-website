@@ -16,7 +16,7 @@ export async function GET(req: Request) {
         })
     }
     
-    const post = await Posts.find({ userId: user._id })
+    const post = await Posts.find({ user: user._id })
 
     return Response.json(post)
 }
