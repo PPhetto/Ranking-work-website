@@ -26,3 +26,8 @@ export type Rank = {
     username: string,
     postcount: string
 }
+
+export type Rankin = {
+    _id: string,
+    username: string
+}

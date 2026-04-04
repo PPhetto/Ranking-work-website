@@ -3,6 +3,7 @@ import './rank.css';
 import Menubar from '../component/menubar';
 import { Rank } from '@/types/Post';
 import { useEffect, useState } from 'react';
+import  Link  from 'next/link'
 
 export default function Rankpage() {
     
@@ -32,9 +33,9 @@ export default function Rankpage() {
                             <p>{index + 1}</p>
                         </div>
                         <div className='username'>
-                            <a href="">
+                            <Link href={`/Rankin/${user.username}`}>
                                 <p>{user.username}</p>
-                            </a>
+                            </Link>
                         </div>
                         <div className='cPost'>
                             <p>{user.postcount}</p>
