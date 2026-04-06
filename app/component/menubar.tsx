@@ -2,15 +2,24 @@
 import '../Home/home.css'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-
+import { useEffect, useState } from "react"
 
 export default function Menubar() {
 
   const router = useRouter()
-  const user = localStorage.getItem("userN")
+  const [user, setUser] = useState("")
+
+  useEffect(() => {
+    async function loadUser() {
+      const userN = localStorage.getItem("userN")
+      if (userN) setUser(userN)
+    }
+    loadUser()
+  }, [])
 
   async function logout() {
     localStorage.removeItem("userId")
+    localStorage.removeItem("userN")
     // console.log(localStorage.getItem("userId"))
     router.push("/")
   }

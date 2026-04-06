@@ -13,7 +13,10 @@ export default function Homepage() {
 
   const [posts,setPosts] = useState<Post[]>([])
 
+  const [uname,setUname] = useState("")
+
   useEffect (() => {
+    const username = localStorage.getItem("userN")
     const userId = localStorage.getItem("userId")
     const userRole = localStorage.getItem("role")
     async function fetchPost() {
@@ -27,6 +30,7 @@ export default function Homepage() {
       const res = await fetch(url)
       const data: Post[] = await res.json()
       setPosts(data)
+      if (username) setUname(username)
     }
     fetchPost()
   }, [])
@@ -39,7 +43,7 @@ export default function Homepage() {
       <Menubar />
 
       <div className='box-content-home'>
-        <h3>Your Working</h3>
+        <h3>{uname} Working</h3>
         <ul>
           {posts.map((post, index) => (
             <li key={post._id}>
