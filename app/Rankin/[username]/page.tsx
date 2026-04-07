@@ -9,19 +9,26 @@ import Moredetailbutton from '@/app/component/moredetailbutton';
 
 export default function Rankinpage({ params }: { params: Promise<{ username: string }> }) {
     const { username } = use(params)
+    const [crole,setCrole] = useState("")
     const  [posts,setPosts] = useState<Post[]>([])
 
     useEffect(() => {
+      const roleAcc = localStorage.getItem("role")
       async function fetctPostin() {
         const res = await fetch(`/api/rankin?username=${username}`)
         const data: Post[] = await res.json()
         setPosts(data)
+        console.log("test : ",roleAcc)
+        setCrole(roleAcc || "")
+        if (!setCrole) {
+          alert("Your role is problem")
+        }
       }
       fetctPostin()
     }, [username])
   return (
     <div className='layout-page-home'>
-      <Menubar />
+      <Menubar />แก
 
       <div className='box-content-home'>
         <h3>{username} Working</h3>
@@ -46,11 +53,23 @@ export default function Rankinpage({ params }: { params: Promise<{ username: str
                 <div className='picture-info'>
                   <img src={post.image} alt="" />
                 </div>
-                <div className='btinfo-card-home'>
+                {crole === "user" &&
+                  <div className='btinfo-card-home'>
+                    <Moredetailbutton title={post.title} description={post.description} image={post.image}/>
+                  </div>
+                }
+                {crole === "admin" &&
+                  <div className='btinfo-card-home'>
+                    <Moredetailbutton title={post.title} description={post.description} image={post.image}/>
+                    <Editbutton _id={post._id} title={post.title} description={post.description} image={post.image}/>
+                    <Deletebutton _id={post._id} />
+                  </div>
+                }
+                {/* <div className='btinfo-card-home'>
                   <Moredetailbutton title={post.title} description={post.description} image={post.image}/>
                   <Editbutton _id={post._id} title={post.title} description={post.description} image={post.image}/>
                   <Deletebutton _id={post._id} />
-                </div>
+                </div> */}
               </div>
             </li>
           ))}

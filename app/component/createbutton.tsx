@@ -11,6 +11,10 @@ export default function Createbutton() {
   const [open,setOpen] = useState(false)
 
   const hSave = async () => {
+    if(!ntitle) {
+      alert("Please your title ?")
+      return
+    }
     const userId = localStorage.getItem("userId")
     try {
       const res = await fetch("/api/createPost",{
