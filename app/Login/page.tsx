@@ -15,16 +15,30 @@ export default function Loginpage() {
             alert("Please")
             return
         }
+
         const res = await fetch("/api/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
+            credentials: "include",
             body: JSON.stringify({
-                username: username,
-                password: password
+                username,
+                password
             })
         })
+
+        // const res = await fetch("/api/login", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify({
+        //         username: username,
+        //         password: password
+        //     })
+        // })
+
         const data = await res.json()
         
         if (!res.ok) {
@@ -32,20 +46,23 @@ export default function Loginpage() {
             return
         }
 
-        localStorage.setItem("userN",data.username)
-        localStorage.setItem("userId", data.userId)
-        localStorage.setItem("role", data.role)
+        alert(data.message)
+        router.push("/Home")
+
+        // localStorage.setItem("userN",data.username)
+        // localStorage.setItem("userId", data.userId)
+        // localStorage.setItem("role", data.role)
 
         // console.log("data:", data)
         // console.log("username:", data.username)
 
-        if (data.role === "admin") {
-            alert(data.message)
-            router.push("/Home")
-        } else if (data.role === "user") {
-            alert(data.message)
-            router.push("/Home")
-        }
+        // if (data.role === "admin") {
+        //     alert(data.message)
+        //     router.push("/Home")
+        // } else if (data.role === "user") {
+        //     alert(data.message)
+        //     router.push("/Home")
+        // }
     }
 
   return (

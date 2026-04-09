@@ -1,6 +1,8 @@
 import { connectDB } from "@/lib/mongodb";
 import Users from "@/models/Users";
-// import jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     await connectDB()
@@ -10,50 +12,55 @@ export async function POST(req: Request) {
     const user = await Users.findOne({username: body.username})
 
     if (!user) {
-        return Response.json(
+        return NextResponse.json(
             {message: "Username not found"},
             {status: 401}
         )
     }
 
     if (user.password !== body.password) {
-        return Response.json(
+        return NextResponse.json(
             {message: "Password incorrect"},
             {status: 401}
         )
     }
 
-    if (user.role === "admin") {
-        return Response.json({
-            message: "Admin login successfully",
+    const token = jwt.sign(
+        {
             userId: user._id,
             username: user.username,
             role: user.role
-        })
-    }
+        },
+        "MY_SECRET_KEY",
+        { expiresIn: "1d" }
+    )
 
-    return Response.json({
-        message: "User login success",
-        userId: user._id,
-        username: user.username,
-        role: user.role
+    const response = NextResponse.json({
+        message: "Login success"
     })
 
-    // const token = jwt.sign(
-    //     {
-    //         userId: user._id,
-    //         role: user.role
-    //     },
-    //     "SECRET_KEY",
-    //     { expiresIn: "1d" }
-    // )
+    response.cookies.set("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        path: "/",
+        maxAge: 60 * 60 * 24
+    })
 
-    // return Response.json(
-    //     {
-    //         message: "Login success",
-    //         userId: user._id
-    //         // token: token
-    //     }
-        
-    // )
+    return response
+
+    // if (user.role === "admin") {
+    //     return Response.json({
+    //         message: "Admin login successfully",
+    //         userId: user._id,
+    //         username: user.username,
+    //         role: user.role
+    //     })
+    // }
+
+    // return Response.json({
+    //     message: "User login success",
+    //     userId: user._id,
+    //     username: user.username,
+    //     role: user.role
+    // })
 }
