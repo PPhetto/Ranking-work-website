@@ -1,6 +1,9 @@
 import { connectDB } from "@/lib/mongodb";
 import Post from "@/models/Posts";
+import { JwtgetPost } from "@/types/Post";
 import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
+import { cookies } from "next/headers";
 
 export async function POST(req: Request) {
     await connectDB()
@@ -20,20 +23,36 @@ export async function POST(req: Request) {
 export async function GET(req: Request) {
     await connectDB()
 
-    const { searchParams } = new URL(req.url)
-    const userId = searchParams.get("userId")
+    const cookiesStore = await cookies()
+    const token = cookiesStore.get("token")?.value
+
+    if (!token) {
+        return Response.json({ message: "Unauthorized" }, { status: 401 })
+    }
+
+    const decode = jwt.verify(token, "MY_SECRET_KEY") as JwtgetPost
 
     let posts
 
-    if (userId) {
-        posts = await Post.find({ user: userId })
-    } else {
+    if (decode.role === "admin" ) {
         posts = await Post.find()
+    } else {
+        posts = await Post.find({ user: decode.userId })
     }
 
-    // const  posts = await Post.find({ user: userId })
 
-    return Response.json(posts)
+    // const { searchParams } = new URL(req.url)
+    // const userId = searchParams.get("userId")
+
+    // let posts
+
+    // if (userId) {
+    //     posts = await Post.find({ user: userId })
+    // } else {
+    //     posts = await Post.find()
+    // }
+
+    return Response.json({posts,username: decode.username, role: decode.role})
 }
 
 export async function DELETE(req: Request) {

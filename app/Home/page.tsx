@@ -12,25 +12,40 @@ import Menubar from '../component/menubar';
 export default function Homepage() {
 
   const [posts,setPosts] = useState<Post[]>([])
-
   const [uname,setUname] = useState("")
 
   useEffect (() => {
-    const username = localStorage.getItem("userN")
-    const userId = localStorage.getItem("userId")
-    const userRole = localStorage.getItem("role")
+    // const username = localStorage.getItem("userN")
+    // const userId = localStorage.getItem("userId")
+    // const userRole = localStorage.getItem("role")
     async function fetchPost() {
-      let url = ""
-      if (userRole === "admin") {
-        url = "/api/createPost"
-      } else  {
-        url = `/api/createPost?userId=${userId}`
+
+      const res = await fetch("/api/createPost", {
+        credentials: "include"
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        console.log("ERROR:", data)
+        setPosts([])
+        return
       }
-      // const res = await fetch(`/api/createPost?userId=${userId}`)
-      const res = await fetch(url)
-      const data: Post[] = await res.json()
-      setPosts(data)
-      if (username) setUname(username)
+
+      setPosts(Array.isArray(data.posts) ? data.posts : [])
+      setUname(data.username || "")
+
+      // let url = ""
+      // if (userRole === "admin") {
+      //   url = "/api/createPost"
+      // } else  {
+      //   url = `/api/createPost?userId=${userId}`
+      // }
+      // // const res = await fetch(`/api/createPost?userId=${userId}`)
+      // const res = await fetch(url)
+      // const data: Post[] = await res.json()
+      // setPosts(data)
+      // if (username) setUname(username)
     }
     fetchPost()
   }, [])
@@ -38,7 +53,7 @@ export default function Homepage() {
 
   return (
     <div className='layout-page-home'>
-      <Authcheck />
+      {/* <Authcheck /> */}
       <Createbutton />
       <Menubar />
 

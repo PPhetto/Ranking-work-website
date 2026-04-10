@@ -31,3 +31,9 @@ export type Rankin = {
     _id: string,
     username: string
 }
+
+export type JwtgetPost = {
+    userId: string
+    username: string
+    role: string
+}
