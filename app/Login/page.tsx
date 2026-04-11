@@ -11,10 +11,10 @@ export default function Loginpage() {
     // console.log(localStorage.getItem("userId"))
 
     async function login() {
-        if (!username || !password) {
-            alert("Please")
-            return
-        }
+        // if (!username || !password) {
+        //     alert("Please")
+        //     return
+        // }
 
         const res = await fetch("/api/login", {
             method: "POST",

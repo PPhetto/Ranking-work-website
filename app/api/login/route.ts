@@ -1,8 +1,9 @@
 import { connectDB } from "@/lib/mongodb";
 import Users from "@/models/Users";
 import jwt from "jsonwebtoken";
-import { cookies } from "next/headers";
+import { cookies } from "next/headers"
 import { NextResponse } from "next/server";
+
 
 export async function POST(req: Request) {
     await connectDB()
@@ -63,4 +64,20 @@ export async function POST(req: Request) {
     //     username: user.username,
     //     role: user.role
     // })
+}
+
+
+export async function GET() {
+
+    const cookiesStore = await cookies()
+    
+    const token = cookiesStore.get("token")?.value
+
+    if (!token) {
+        return Response.json({ message: "Found" }, { status: 401 })
+    }
+
+    const decode = jwt.verify(token, "MY_SECRET_KEY")
+
+    return Response.json(decode)
 }

@@ -53,7 +53,7 @@ export default function Homepage() {
 
   return (
     <div className='layout-page-home'>
-      {/* <Authcheck /> */}
+      <Authcheck />
       <Createbutton />
       <Menubar />
 
