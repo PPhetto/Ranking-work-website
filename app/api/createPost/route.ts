@@ -8,13 +8,22 @@ import { cookies } from "next/headers";
 export async function POST(req: Request) {
     await connectDB()
 
+    const cookiesStore = await cookies()
+    const token = cookiesStore.get("token")?.value
+
+    if (!token) {
+        return Response.json({ message: "Unauthorized"}, { status: 401 })
+    }
+
+    const decode = jwt.verify(token, "MY_SECRET_KEY") as JwtgetPost
+
     const body = await req.json()
 
     const post = await Post.create({
         title: body.title,
         description: body.description,
         image: body.image,
-        user: new mongoose.Types.ObjectId(body.user)
+        user: new mongoose.Types.ObjectId(decode.userId)
     })
 
     return Response.json(post)

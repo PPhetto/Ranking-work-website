@@ -10,16 +10,19 @@ export default function Menubar() {
   const [user, setUser] = useState("")
 
   useEffect(() => {
-    async function loadUser() {
-      const userN = localStorage.getItem("userN")
-      if (userN) setUser(userN)
+    async function fetchapi() {
+      const res = await fetch("/api/createPost", {
+        credentials: "include"
+      })
+      const data = await res.json()
+      setUser(data.username)
     }
-    loadUser()
+    fetchapi()
   }, [])
 
   async function logout() {
-    localStorage.removeItem("userId")
-    localStorage.removeItem("userN")
+    // localStorage.removeItem("userId")
+    // localStorage.removeItem("userN")
     // console.log(localStorage.getItem("userId"))
     router.push("/")
   }

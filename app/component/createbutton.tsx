@@ -15,18 +15,19 @@ export default function Createbutton() {
       alert("Please your title ?")
       return
     }
-    const userId = localStorage.getItem("userId")
+    // const userId = localStorage.getItem("userId")
     try {
       const res = await fetch("/api/createPost",{
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
+        credentials: "include",
         body: JSON.stringify({
           title: ntitle,
           description: ndescription,
           image: url,
-          user: userId
+          // user: userId
         })
       })
       location.reload()
