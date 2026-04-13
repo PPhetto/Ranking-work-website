@@ -1,7 +1,7 @@
 "use client"
 import '../../Home/home.css';
 import { useEffect, useState, use } from "react"
-import { Post } from "@/types/Post"
+import { Post, Postsec } from "@/types/Post"
 import Menubar from '@/app/component/menubar';
 import Deletebutton from '@/app/component/deletebutton';
 import Editbutton from '@/app/component/editbutton';
@@ -13,16 +13,12 @@ export default function Rankinpage({ params }: { params: Promise<{ username: str
     const  [posts,setPosts] = useState<Post[]>([])
 
     useEffect(() => {
-      const roleAcc = localStorage.getItem("role")
       async function fetctPostin() {
         const res = await fetch(`/api/rankin?username=${username}`)
-        const data: Post[] = await res.json()
-        setPosts(data)
-        console.log("test : ",roleAcc)
-        setCrole(roleAcc || "")
-        if (!setCrole) {
-          alert("Your role is problem")
-        }
+        const data: Postsec = await res.json()
+        setPosts(data.post)
+        setCrole(data.role)
+        
       }
       fetctPostin()
     }, [username])

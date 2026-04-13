@@ -42,7 +42,6 @@ export default function Editbutton({_id,title,description,image} : EditPost) {
             <div className='input-content'>
               <input
                 value={ntitle}
-                disabled 
                 onChange={(t) => {
                   setNtitle(t.target.value)
                 }}
