@@ -13,7 +13,8 @@ export default function Deletebutton({_id} : DeletePost) {
                 _id: _id
             })
         })
-
+        const data = await res.json()
+        alert(data.message)
         location.reload()
     }
   return (
