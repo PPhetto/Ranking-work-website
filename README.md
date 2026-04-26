@@ -1,4 +1,4 @@
-# Ranking Work Website
+# Project-leaderboard Website
 A fullstack web application for creating and managing ranking systems such as voting, scoring, and leaderboards.
 This project focuses on building a complete web application with authentication, API handling, and role-based access control using Next.js.
 โปรเจกต์เว็บจัดอันดับ (Ranking System) ที่พัฒนาด้วย Next.js โดยเน้นการทำงานแบบ Fullstack ทั้ง Frontend และ Backend รวมถึงระบบ Login และการจัดการสิทธิ์ผู้ใช้งาน
