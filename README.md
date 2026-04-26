@@ -5,7 +5,7 @@ This project focuses on building a complete web application with authentication,
 
 ## 🛠 Tech Stack
 - Next.js
-- Next.js API Routes (Node.js)
+- Next.js API Routes
 - TypeScript
 - JWT Authentication + Cookies
 - MongoDB
